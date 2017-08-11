@@ -1,0 +1,4 @@
+exportmeansd<-function(dat){
+	
+	
+}

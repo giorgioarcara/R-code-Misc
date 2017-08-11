@@ -1,0 +1,561 @@
+library(rattle)
+rattle()
+library(rattle)
+detach(package:rattle)
+library(rattle)
+rattle()
+install.packages("RGtk2")
+library(rattle)
+rattle()
+library(RGtk2)
+library(rattle)
+rattle()
+crv$rattleUI <- "rattle_macosx.ui"
+rattle()
+ANALISI NN1 vs NN2 #######
+#
+load('~/Desktop/eye mvm compounds/datall per analisi trasparenza.RData')##
+library(languageR)#
+#
+NN=datall[datall$type%in%c("NNdx", "NNsx"),]#
+#
+### creo variabili per poter usare influence.ME#
+#
+NN$log_TotViewDur.OBJ=log(NN$TotViewDur.OBJ)#
+NN$scaled_rating=scale(NN$rating)#
+NN$log_freq.target.repub=log(NN$freq.target.repub)#
+NN.lmer0=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN)
+library(lme4)
+NN.lmer0=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN)
+library(influence.ME)
+NN.lmer0=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN)
+influence(NN.lmer0, "Subject")
+a=influence(NN.lmer0, "Subject")
+plot(a)
+a=influence(NN.lmer0, "TARGET")
+plot(a)
+?influence.ME
+cooks.distance(a)
+plot(a)
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c("pallacanestro", "montepremi", "burrocacao")])
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c("pallacanestro", "montepremi", "burrocacao"),])
+NN.lmer1
+summary(NN.lmer1)
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1+type|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c("pallacanestro", "montepremi", "burrocacao"),])
+summary(NN.lmer1)
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c("pallacanestro", "montepremi", "burrocacao"),])
+NN.lmer1
+summary(NN.lmer1)
+summary(NN.lmer0)
+plot.influence
+?plot.influence
+??plot.influence
+influence(NN.lmer0, "Subject")
+a=influence(NN.lmer0, "Subject")
+plot.estex
+?plot.estex
+plot(a)
+plot(a, which="cook")
+plot(a, which="pchanges")
+quartz()
+plot(a, which="pchanges")
+plot(a, which="pchange")
+plot(a, which="cook")
+plot(a, which="pchange")
+plot(a, which="sigtest")
+?plot.extex
+?plot.estex
+a=influence(NN.lmer0, "Subject")
+plot(a)
+a=influence(NN.lmer0, "TARGET")
+a=influence(NN.lmer0, "TARGET", which="dfbeta")
+a
+plot(a, which="dfbeta")
+a
+plot(a, which="dfbeta")
+plot(a, which="dfbetas")
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c( "montepremi")])
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c( "montepremi"),])
+NN.lmer1
+summary(NN.lmer1)
+summary(NN.lmer0)
+a
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c( "pallacanestro", "fangoterapia"),])
+summary(NN.lmer0)
+summary(NN.lmer1)
+summary(NN.lmer0)
+NN.lmer1=lmer(log_TotViewDur.OBJ~type+scaled_rating+log_freq.target.repub+length.target+(1|Subject)+(1|TARGET), data=NN[!NN$TARGET%in%c( "pallacanestro", "fangoterapia", "montepremi"),])
+summary(NN.lmer1)
+plot(a, which="dfbetas")
+library(rattle)
+rattla()
+rattle()
+x11()
+library(RGtk2)
+install.packages("rattle", repos="http://rattle.togaware.com", type="source")
+library(rattle)
+rattle()
+library(rattle)
+rattle()
+library(rattle)
+rattle()
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black')#
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+}
+library(plotrix)
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black')#
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+}
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	#draw body#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	#draw.beak#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	#draw eye circles#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	#draw pupils#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black') #
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+	#draw hirid#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.1, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.1, col='white')#
+}
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	#draw body#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	#draw.beak#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	#draw eye circles#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	#draw pupils#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black') #
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+	#draw hirid#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.05, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.05, col='white')#
+}
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	#draw body#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	#draw.beak#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	#draw eye circles#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	#draw pupils#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black') #
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+	#draw hirid#
+	draw.circle(x[i]-0.42, y[i]+0.65, 0.02, col='white')#
+	draw.circle(x[i]+0.38, y[i]+0.65, 0.02, col='white')#
+}
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	#draw body#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	#draw.beak#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	#draw eye circles#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	#draw pupils#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black') #
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+	#draw hirid#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.02, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.02, col='white')#
+}
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	#draw body#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	#draw.beak#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	#draw eye circles#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	#draw pupils#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black') #
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+	#draw hirid#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.05, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.05, col='white')#
+}
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	#draw body#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	#draw.beak#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	#draw eye circles#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	#draw pupils#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black') #
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+}
+y=c(700, 500, 800, 800)#
+ysd=c(0.1, 0.2, 0.3, 0.35)#
+n=length(y)#
+x=seq(2,(n*2),2)#
+plot(x,y, xlim=c(1,n*2), type='n', ylim=c(500, 1000))#
+for (i in 1:length(y)){#
+	#draw body#
+	draw.circle(x[i], y[i], 1, col="gray")#
+	#draw.beak#
+	polygon(c(x[i], x[i]+0.4, x[i]-0.4), c(y[i]-50, y[i], y[i]), col="orange")#
+	#draw eye circles#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.4, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.4, col='white')#
+	#draw pupils#
+	draw.circle(x[i]-0.4, y[i]+0.6, ysd[i], col='black') #
+	draw.circle(x[i]+0.4, y[i]+0.6, ysd[i],col='black')#
+	#draw hirid#
+	draw.circle(x[i]-0.4, y[i]+0.6, 0.05, col='white')#
+	draw.circle(x[i]+0.4, y[i]+0.6, 0.05, col='white')#
+}
+?fisher.test
+library(lattice)
+load("/Users/giorgioarcara/Desktop/NADL/nadl.RData")
+ls()
+head(nadl)
+parallelplot(~nadl[, c("moca","education")], nadl)
+parallelplot(~nadl[, c("moca","education", "age")], nadl)
+parallelplot(~nadl[, c("moca","education", "age")]|diagnosi, nadl)
+parallelplot(~nadl[, c("moca","education", "age")], nadl, col=nadl$diagnosi)
+parallelplot(~nadl[, c("moca","education", "age")]|diagnosi, nadl, col=nadl$diagnosi)
+parallelplot(~nadl[, c("moca","education", "age")], nadl)
+quartz()
+parallelplot(~nadl[, c("moca","education", "age")], nadl, col=nadl$diagnosi)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI")], col=nadl$diagnosi)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=nadl$diagnosi)
+nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),]
+nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"]
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=nadl$diagnosi)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"])
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"]+1)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"])
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"]))
+as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"])
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"])+10)
+parallelplot(~nadl[, c("moca","education", "age")]|diagnosi, nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"])+10)
+parallelplot(~nadl[, c("moca","education", "age")]|diagnosi, nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),])
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "MCI"),"diagnosi"])+10)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("MCI"),], col=as.numeric(nadl[nadl$diagnosi%in%c("MCI"),"diagnosi"])+10)
+parallelplot(~nadl[, c("moca","education", "age")]|diagnosi, nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),])
+parallelplot(~nadl[, c("moca","education", "age")]|diagnosi, nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])+10)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])+10)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])+1)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])+2)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])+3)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])*3)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])*2)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])*4)
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])*4')
+?parallelplot
+library(MASS)
+?parcoord
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])*4')
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "FTD"),"diagnosi"])+10)
+nadl$DIAGNOSI
+nadl$diagnosi
+parallelplot(~nadl[, c("moca","education", "age")], nadl[nadl$diagnosi%in%c("CONTROLLO", "ALZHEIMER"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "ALZHEIMER"),"diagnosi"])+10)
+min(nadl$controllo)
+min(nadl$age)
+min(nadl$age, na.rm=F)
+min(nadl$age, na.rm=T)
+parallelplot(~nadl[, c("moca","education", "age")]|diagnosi, nadl[nadl$diagnosi%in%c("CONTROLLO", "ALZHEIMER"),], col=as.numeric(nadl[nadl$diagnosi%in%c("CONTROLLO", "ALZHEIMER"),"diagnosi"])+10)
+max(nadl[nadl$diagnosi=="ALZHEIMER", "moca"])
+max(nadl[nadl$diagnosi=="ALZHEIMER", "moca"], na.rm=T)
+min(nadl[nadl$diagnosi=="ALZHEIMER", "moca"], na.rm=T)
+?^parcoord
+?parcoord
+parcoord(nadl[,c("moca", "age", "education")], col=as.numeric(nadl$diagnosi))
+nadl2=nadl[nadl$diagnosi%in%c("CONTROLLO", "ALZHEIMER"),]
+nadl2$diagnosi=factor(nadl2$diagnosi)
+parcoord(nadl2[,c("moca", "age", "education")], col=as.numeric(nadl2$diagnosi))
+parallelplot(nadl2[,c("moca", "age", "education")], col=as.numeric(nadl2$diagnosi))
+parallelplot(nadl2[,c("age", "education", "moca")], col=as.numeric(nadl2$diagnosi))
+?image
+load("/Users/giorgioarcara/Desktop/NADL/nadl.RData")
+nadl.sel=nadl#
+formaltests=c("number.comprehension.total", "total.reading.and.writing.arabic.numerals", "total.mental.calculation", "total.written.calculation", "total.written.operation")
+dat=nadl[,formaltests]
+dat
+image(nrow(dat), ncol(dat), dat)
+image(nrow(dat), ncol(dat), as.matrix(dat))
+image( as.matrix(dat))
+image(nrow(dat), ncol(dat), as.matrix(t(dat)))
+image( as.matrix(t(dat)))
+load("/Users/giorgioarcara/Desktop/eye mvm compounds/oggetti creati/oggetti interfaccia/psyvar.RData")
+load("/Users/giorgioarcara/Desktop/Lavori unipd/brokencomp analisi e grafici/broken_compoundsM&G.RData")
+ls()
+unique(dat$stimuli)
+head(dat)
+compounds=dat[dat$type=="NN1"|dat$type=="NN2",]
+compounds
+compounds=dat[dat$type=="NN1"|dat$type=="NN2","word"]
+compounds
+unique(compound$words)
+unique(compounds$word)
+unique(compound$word)
+unique(compounds$word)
+unique(compounds$words)
+compounds
+compounds=dat[dat$type=="NN1"|dat$type=="NN2",c("word", "type")]
+compounds
+compounds[match(compounds$word, unique(compounds$word))]
+compounds[match(compounds$word, unique(compounds$word)),]
+match(compounds$word, unique(compounds$word))
+compounds[match(unique(compounds$word), compounds$word),]
+a=compounds[match(unique(compounds$word), compounds$word),]
+a
+a=a[order(a$type), ]
+a
+a=a[order(a$word, a$type), ]
+a
+a=a[order(a$type, a$word), ]
+a
+psyvar
+a
+unique(psyvar$words)
+unique(psyvar$word)
+unique(psyvar$TARGET)
+a=unique(psyvar$TARGET)
+a
+a[1:40,]
+a[1:40]
+a[1:41]
+a[1:40]
+a=compounds[match(unique(compounds$word), compounds$word),]
+a
+b=unique(psyvar$TARGET)
+a
+b
+b%in%a$words
+b%in%a$word
+a
+a$word
+b%in%a$word
+a$word
+b
+b=b[1:40]
+b
+b%in%a$word
+as.numeric(b%in%a$word)
+sum(as.numeric(b%in%a$word))
+length(as.numeric(b%in%a$word))
+30/40
+library(nnet)
+?nnet
+library(lme4)
+install.packages("lme4")
+history ANALISI ERP#
+#######################
+#
+#creo l'environment#
+Exp1.env=new.env()#
+#
+#load(file.choose(), envir=Exp1.env) # selezionare il file Exp1.RData#
+#
+#consiglio in alternativa di settare la directory manualmente#
+#
+setwd("~/Desktop/pacchetto R erp")#
+load("Exp1.RData", envir=Exp1.env)#
+#
+# creo una lista con coppie che indicano gli intervalli per cui voglio calcolare Mean Amplitude#
+intervals=list(c(130,190), c(400,600), c(500, 700))#
+# creo un vettore che faccia corrispondere ad ogni "base" la condizione sperimentale. Mi servirà per aggiungere il nome della condizione al dataset finale. #
+bases=c("Exp1_word_subj", "Exp1_nonword_subj")#
+conditions=c("WORD", "NONWORD")#
+# nei passi successivi creo il data.frame datall.long, che contiene tutte le informazioni per poter fare le analisi statistiche. Il data.frame è in formato "largo", cioè in formato ancora non adatto per analisi come Anova o mixed models.#
+# Nel passaggio sotto uso la funzione#
+# in questo ciclo (sono due cicli annidati) calcolo l'average per i miei soggetti per tutti gli intervalli.#
+# ad ogni ciclo creo un'oggetto che si chiama temp. E ad ogni ciclo faccio delle piccole aggiunte all'oggetto creato (in particolare aggiungo il nome della condizion etc.)#
+# creo un oggetto datall.long vuoto prima del ciclo altrimenti lo script non funziona.#
+datall.long=NULL#
+#
+for (int in 1:length(intervals))#
+	{#
+	for (k in 1:length(conditions)){#
+		temp=erp.measure(base=bases[k], numbers=1:20, win.ini=intervals[[int]][1], win.end=intervals[[int]][2], env=Exp1.env, startmsec=-200, endmsec=1500,#
+		fun=average.mean, others=c(condition=conditions[k], interval=paste(intervals[[int]][1], "-", intervals[[int]][2], sep="")), name.dep="Ampl", format="long")#
+			datall.long=rbind(datall.long, temp)#
+#
+		}#
+	}#
+#########################
+# NOTA!!! il codice sopra, funziona bene nel caso di situazione completamente within.#
+# nel caso di disegni between occorrerà fare dei cicli separati, dove a cambiare potrebbero essere le "base" (se diversi gruppi sperimentali hanno base diverse), i numbers (se i diversi soggetti appartenenti a gruppi diversi hanno numbers diversi), o entrambi.#
+# questo dipende dalla codifica fatta in partenza. #
+#######################
+##############################
+# il codice sotto è l'equivalente del ciclo sopra (ma senza ciclo). In questo caso il codice non è tanto più lungo, ma il vantaggio del ciclo si vede quando si hanno molte condizioni e molte finestre. Es. con 8 condizioni sperimentali e 8 finestre, ci sarebbero 8*8=64 oggetti "temp" da creare (e corrispondenti righe di codice)#
+temp1=erp.measure(base="Exp1_word_subj", numbers=1:20, win.ini=130, win.end=190, env=Exp1.env, startmsec=-200, endmsec=1500,#
+		fun=average.mean, others=c(condition="WORD", interval=c("130-190")), name.dep="Ampl", format="long")#
+#
+temp2=erp.measure(base="Exp1_nonword_subj", numbers=1:20, win.ini=130, win.end=190, env=Exp1.env, startmsec=-200, endmsec=1500,#
+		fun=average.mean, others=c(condition="NONWORD", interval=c("130-190")), name.dep="Ampl", format="long")#
+#
+temp3=erp.measure(base="Exp1_word_subj", numbers=1:20, win.ini=400, win.end=600, env=Exp1.env, startmsec=-200, endmsec=1500,#
+		fun=average.mean, others=c(condition="WORD", interval=c("400-600")), name.dep="Ampl", format="long")#
+#
+temp4=erp.measure(base="Exp1_nonword_subj", numbers=1:20, win.ini=400, win.end=600, env=Exp1.env, startmsec=-200, endmsec=1500,#
+		fun=average.mean, others=c(condition="NONWORD", interval=c("400-600")), name.dep="Ampl", format="long")#
+#
+temp5=erp.measure(base="Exp1_word_subj", numbers=1:20, win.ini=500, win.end=700, env=Exp1.env, startmsec=-200, endmsec=1500,#
+		fun=average.mean, others=c(condition="WORD", interval=c("500-700")), name.dep="Ampl", format="long")#
+#
+temp6=erp.measure(base="Exp1_nonword_subj", numbers=1:20, win.ini=500, win.end=700, env=Exp1.env, startmsec=-200, endmsec=1500,#
+		fun=average.mean, others=c(condition="NONWORD", interval=c("500-700")), name.dep="Ampl", format="long")#
+datall.long2=rbind(temp1, temp2, temp3, temp4, temp5, temp6)	#
+#verifico che le due procedure siano corrispondendi, facendo un check logico di confronto di tutte le celle#
+#
+all(datall.long==datall.long2)
+source("/Users/giorgioarcara/Desktop/R files/char2fac.R")#
+source("/Users/giorgioarcara/Desktop/R files/rearrange 0.2.R")#
+source("/Users/giorgioarcara/Desktop/R files/load.eeg.multi.R")#
+source("/Users/giorgioarcara/Desktop/R files/cn.R")#
+source("/Users/giorgioarcara/Desktop/R files/factorall.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezresults 3.0.R")#
+source("/Users/giorgioarcara/Desktop/R files/export.bplot.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.within 0.5.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.mixed.matrix.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.mixed 0.2.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.bet.matrix.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.within.matrix 0.5.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezANOVA.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezANOVA.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/plot.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/summarytab.R")#
+#
+source("/Users/giorgioarcara/Desktop/R files/t.test.pairs.R")#
+source("/Users/giorgioarcara/Desktop/R files/pairwise.t.test.g.R")
+setwd("~/Desktop/R files/funzioni erpR")
+setwd("~/Desktop/R files/funzioni erpR")#
+for (i in 1:length(dir())){#
+	source(dir()[i])#
+}
+i
+source('~/Desktop/R files/funzioni erpR/export.bplot.R', chdir = TRUE)
+setwd("~/Desktop/R files/funzioni erpR")#
+for (i in 1:length(dir())){#
+	source(dir()[i], , chdir=T)#
+}
+dir()[i]
+source(dir()[i])
+setwd("~/Desktop/R files/funzioni erpR")#
+options(encoding="macroman")#
+for (i in 1:length(dir())){#
+	source(dir()[i], , chdir=T)#
+}
+source('~/Desktop/R files/funzioni erpR/export.pls.R', chdir = TRUE)
+setwd("~/Desktop/R files/funzioni erpR")#
+options(encoding="macroman")#
+for (i in 1:length(dir())){#
+	source(dir()[i], , chdir=T)#
+}
+sys.time(setwd("~/Desktop/R files/funzioni erpR")#
+options(encoding="macroman")#
+for (i in 1:length(dir())){#
+	source(dir()[i], , chdir=T)#
+})
+setwd("~/Desktop/R files/funzioni erpR")#
+options(encoding="macroman")#
+for (i in 1:length(dir())){#
+	source(dir()[i], , chdir=T)#
+}
+setwd("~/Desktop/R files/funzioni erpR")#
+options(encoding="macroman")#
+for (i in 1:length(dir())){#
+	source(dir()[i], , chdir=T)#
+}#
+#
+source('~/Desktop/R files/funzioni erpR/export.pls.R', chdir = TRUE)#
+source("/Users/giorgioarcara/Desktop/R files/char2fac.R")#
+source("/Users/giorgioarcara/Desktop/R files/rearrange 0.2.R")#
+source("/Users/giorgioarcara/Desktop/R files/load.eeg.multi.R")#
+source("/Users/giorgioarcara/Desktop/R files/cn.R")#
+source("/Users/giorgioarcara/Desktop/R files/factorall.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezresults 3.0.R")#
+source("/Users/giorgioarcara/Desktop/R files/export.bplot.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.within 0.5.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.mixed.matrix.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.mixed 0.2.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.bet.matrix.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.within.matrix 0.5.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezANOVA.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezANOVA.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/plot.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/summarytab.R")#
+#
+source("/Users/giorgioarcara/Desktop/R files/t.test.pairs.R")#
+source("/Users/giorgioarcara/Desktop/R files/pairwise.t.test.g.R")
+source("/Users/giorgioarcara/Desktop/R files/char2fac.R")#
+source("/Users/giorgioarcara/Desktop/R files/rearrange 0.2.R")#
+source("/Users/giorgioarcara/Desktop/R files/load.eeg.multi.R")#
+source("/Users/giorgioarcara/Desktop/R files/cn.R")#
+source("/Users/giorgioarcara/Desktop/R files/factorall.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezresults 3.0.R")#
+source("/Users/giorgioarcara/Desktop/R files/export.bplot.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.within 0.5.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.mixed.matrix.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.mixed 0.2.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.bet.matrix.R")#
+source("/Users/giorgioarcara/Desktop/R files/contr.within.matrix 0.5.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezANOVA.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/ezANOVA.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/plot.nout.R")#
+source("/Users/giorgioarcara/Desktop/R files/summarytab.R")#
+#
+source("/Users/giorgioarcara/Desktop/R files/t.test.pairs.R")#
+source("/Users/giorgioarcara/Desktop/R files/pairwise.t.test.g.R")
