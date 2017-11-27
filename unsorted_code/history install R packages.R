@@ -46,6 +46,8 @@
 # CTT # include a function for Spearman Brown formula.
 # caret # for RandomForests
 # ggraph # useful fror graph (used for same plot with caret.)
+# tictoc useful for tic toc in matlab style
+# tidyverse: all packages of the tidverse
 
 ##############
 ## IMPORTANTE
@@ -53,7 +55,7 @@
 # per poter installare TCL/TK package, devi anche avere installato un altro package (http://cran.r-project.org/bin/macosx/tools/)
 
 
-package.list=c("mvoutlier", "MASS", "psych","languageR", "tolerance", "sn", "pROC", "car", "lme4", "ez", "rms", "sciplot", "rela", "psychometric", "gdata", "eRm", "rpanel", "scatterplot3d", "rgl", "plotrix", "effects", "ltm", "influence.ME", "bayesclust", "pvclust", "rggobi", "gamm4", "rminer", "akima", "pwr", "devtools", "Matrix", "cvTools", "equivalence", "caret", "ggraph")
+package.list=c("mvoutlier", "MASS", "psych","languageR", "tolerance", "sn", "pROC", "car", "lme4", "ez", "rms", "sciplot", "rela", "psychometric", "gdata", "eRm", "rpanel", "scatterplot3d", "rgl", "plotrix", "effects", "ltm", "influence.ME", "bayesclust", "pvclust", "rggobi", "gamm4", "rminer", "akima", "pwr", "devtools", "Matrix", "cvTools", "equivalence", "caret", "ggraph", "tictoc", "tidyverse")
 
 
 

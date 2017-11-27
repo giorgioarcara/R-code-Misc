@@ -1,8 +1,7 @@
 library(erpR)
 
-source("/Users/giorgioarcara/Documents/R files/funzioni erpR altre/erp.se.R")
-source("/Users/giorgioarcara/Documents/R files/funzioni erpR altre/erp.se.bands.R")
-source("/Users/giorgioarcara/Desktop/grandaverage.R")
+source("/Users/giorgioarcara/Documents/R_code_Giorgio/unsorted_code/funzioni erpR altre/grandaverage.se.R")
+source("/Users/giorgioarcara/Documents/R_code_Giorgio/unsorted_code/funzioni erpR altre/grandaverage.bands.R")
 
 
 data(ERPsets)
@@ -11,9 +10,9 @@ data(ERPsets)
 
 word=grandaverage("Exp1_word_subj", 1:20, erplist=ERPsets)
 
-word.se = erp.se ("Exp1_word_subj", 1:20, erplist=ERPsets)
+word.se = grandaverage.se ("Exp1_word_subj", 1:20, erplist=ERPsets)
 
-myband = erp.se.bands(word, word.se, "FPZ")
+myband = grandaverage.bands(word, word.se, "FPZ")
 
 library(ggplot2)
 

@@ -2,6 +2,10 @@
 #
 
 visual.angle=function(angle=NULL, length.s=NULL, distance=NULL, plot=T){
+  
+  # remember. Recommended visual angle is 2 degrees (Fovea)
+  
+  
 	if (is.null(angle)){
 	## ang_gradi=ang_rad*(180/pi)
 	# angle=angle.deg*pi*(180)

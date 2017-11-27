@@ -1,5 +1,5 @@
-
-erp.se = function (base, numbers, electrodes = "all", erplist = NULL, 
+ 
+grandaverage.se = function (base, numbers, electrodes = "all", erplist = NULL, 
                   NA.sub = TRUE, type = "se") 
 {
   if (is.null(erplist)) {
