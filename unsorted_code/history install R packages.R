@@ -48,6 +48,7 @@
 # ggraph # useful fror graph (used for same plot with caret.)
 # tictoc useful for tic toc in matlab style
 # tidyverse: all packages of the tidverse
+# XLConnect: best for importing excel files
 
 ##############
 ## IMPORTANTE
@@ -55,14 +56,15 @@
 # per poter installare TCL/TK package, devi anche avere installato un altro package (http://cran.r-project.org/bin/macosx/tools/)
 
 
-package.list=c("mvoutlier", "MASS", "psych","languageR", "tolerance", "sn", "pROC", "car", "lme4", "ez", "rms", "sciplot", "rela", "psychometric", "gdata", "eRm", "rpanel", "scatterplot3d", "rgl", "plotrix", "effects", "ltm", "influence.ME", "bayesclust", "pvclust", "rggobi", "gamm4", "rminer", "akima", "pwr", "devtools", "Matrix", "cvTools", "equivalence", "caret", "ggraph", "tictoc", "tidyverse")
+package.list=c("mvoutlier", "MASS", "psych","languageR", "tolerance", "sn", "pROC", "car", "lme4", "ez", "rms", "sciplot", "rela", "psychometric", "gdata", "eRm", "rpanel", "scatterplot3d", "rgl", "plotrix", "effects", "ltm", "influence.ME", "bayesclust", "pvclust", "rggobi", "gamm4", "rminer", "akima", 
+               "pwr", "devtools", "Matrix", "cvTools", "equivalence", "caret", "ggraph", "tictoc", "tidyverse", "XLConnect")
 
 
 
 # questa è la library, nota che cambierà a seconda del nome della versione in corso!. Devi quindi vedere esattamente come è chiamata la cartella e ricreare la dir di conseguenza.
 ## NOTA!!!:se installi una nuova versione di R devi cambiare il numero di versione nella Rlibrarydir di conseguenza.
 
-Rlibrarydir="/Users/giorgioarcara/Library/R/3.0/library"
+#Rlibrarydir="/Users/giorgioarcara/Library/R/3.0/library"
 
 install.packages(package.list, dependencies=T)
 

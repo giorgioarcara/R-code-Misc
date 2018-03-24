@@ -4,7 +4,7 @@ library(dplyr)
 data(iris)
 
 # create initial barplot
-myplot = ggplot(iris, aes(x = Species, y = Sepal.Length), stat="identity")
+myplot = ggplot(iris, aes(x = Species, y = Sepal.Length))
 
 # create barplot
 my_barplot = myplot + stat_summary(fun.y = mean, geom = "col", fill = "White", colour = "Black", width=0.5) + 
@@ -44,7 +44,7 @@ mean_se = function(x){
 
 ### VIOLIN
 my_violin_plot = myplot +
- # geom_violin(col="black", fill="gray", alpha=0.2, trim = FALSE) +
+  geom_violin(col="black", fill="gray", alpha=0.2, trim = FALSE) +
    geom_jitter(width=0.05, col="darkgray", alpha=0.9) +
   stat_summary(fun.data = mean_se, geom = "errorbar", width=0.2, size=1) +
 stat_summary(fun.y = mean, geom = "point", fill = "black", colour = "black", size=4) +
@@ -54,3 +54,24 @@ stat_summary(aes(group=1), fun.y=mean, geom="line", size=1.1)
 my_violin_plot_t = my_violin_plot + my_theme
 
 my_violin_plot_t
+
+
+### BAR
+my_bar_plot = myplot +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width=0.2, size=1, position=position_dodge(width=50)) +
+  stat_summary(fun.y = mean, geom = "bar", fill = c("red", "blue", "black"), 
+               colour = "black", size=1, position=position_nudge(c(0.1, 0.1, 0.8)))
+
+
+my_bar_plot_t = my_bar_plot + my_theme
+
+my_bar_plot_t
+
+
+ggplot(iris, aes(x = Species, y = Sepal.Length)) + 
+  stat_summary()
+  stat_summary(fun.data = mean_se, geom = "errorbar", position=position_dodge(width=10)) 
+  
+
+
+
