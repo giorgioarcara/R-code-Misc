@@ -73,5 +73,5 @@ ggplot(iris, aes(x = Species, y = Sepal.Length)) +
   stat_summary(fun.data = mean_se, geom = "errorbar", position=position_dodge(width=10)) 
   
 
-
-
+ggsave("My_plot.png",  scale = 1, width=20, height=15, units="cm")
+  

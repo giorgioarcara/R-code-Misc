@@ -1,0 +1,6 @@
+# to check
+# actually an electrode on a given timepoin CANNOT belong to more than one cluster. 
+# is that ok?
+
+# how to return filtered/unfiltered results?
+

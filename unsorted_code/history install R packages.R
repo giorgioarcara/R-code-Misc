@@ -48,7 +48,8 @@
 # ggraph # useful fror graph (used for same plot with caret.)
 # tictoc useful for tic toc in matlab style
 # tidyverse: all packages of the tidverse
-# XLConnect: best for importing excel files
+# XLConnect: good for importing excel files but dependes on Java
+# openxlsx: best for importing xlsx (does not depend on java)
 
 ##############
 ## IMPORTANTE

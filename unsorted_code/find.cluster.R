@@ -1,14 +1,16 @@
-# https://github.com/dmgroppe/Mass_Univariate_ERP_Toolbox/blob/master/find_clusters.m
-
-
-tscores=t(res$t.mat)
-
-thresh=5
-
-thresh_sign=-1 # metto un numero positivo
-
-
-find.cluster<-function(tscores, thresh, chan_hood, thresh_sign){
+find.clusters<-function(tscores, thresh, chan_hood, thresh_sign){
+  
+  
+  # https://github.com/dmgroppe/Mass_Univariate_ERP_Toolbox/blob/master/find_clusters.m
+  
+  
+  #tscores=t(res$t.mat)
+  
+  #thresh=5
+  
+  #thresh_sign=-1 # metto un numero positivo
+  
+  
   
   # !!! Data ara arranged nchan*n_tpt
   
@@ -16,7 +18,7 @@ find.cluster<-function(tscores, thresh, chan_hood, thresh_sign){
   n_chan=dim(tscores)[1] # get number of channels
   n_tpt=dim(tscores)[2] # get number of timepoints
   
-  # !! creo una variabile Globale su MATLAB (non so se può creare problemi)
+  # !! creo una variabile Globale su MATLAB (non so se pu? creare problemi)
   clust_ids=NULL
  
   clust_ids=matrix(0, nrow=n_chan, ncol=n_tpt)
@@ -79,48 +81,6 @@ find.cluster<-function(tscores, thresh, chan_hood, thresh_sign){
     } # close for( a in 1:n_above)
     
   clust_membership=clust_ids;
-  
-  #clear global clust_ids
-  
-  # create the other function
-  follow_clust<-function(n_above,current_voxel_id,current_clust_num,above_thresh_ids,above_thresh_times,above_thresh_chans,chan_hood,n_chan){
-    
-    new_members=matrix(0, nrow=1, ncol=nchan*3) 
-    new_members_ct=0
-    
-    for (b in current_clust_num : n_above){
-      
-      if (!clust_ids[above_thresh_ids[b]]){
-     
-        temp_dist=abs(above_thresh_times[b]-above_thresh_times[current_voxel_id]);
-        
-      if (above_thresh_chans[current_voxel_id]==above_thresh_chans[b]){
-          #voxels are at same channel
-          chan_dist=0;
-          
-      } else if (chan_hood[above_thresh_chans[current_voxel_id] , above_thresh_chans[b]]) {
-          #channels are neighbors
-          chan_dist=1;
-      } else {
-      #voxels aren't spatially compatible
-      chan_dist=2
-      }
-        
-      if ((temp_dist+chan_dist)<=1) {
-        #if voxels are at same time point and neighboring channels OR
-        #if voxels are at same channel and neighboring time points,
-        #merge them into the same cluster
-      
-        clust_ids[above_thresh_ids[b]]=current_clust_num;
-        #keep track of which other voxels are joined to this
-        #cluster
-        new_members_ct=new_members_ct+1;
-        new_members[new_members_ct]=b;
-        } # if ((temp_dist)
-      }# if !clust
-    } # for (b)
-
-  } # end function follow_clust
 
   return(clust_membership)
   
