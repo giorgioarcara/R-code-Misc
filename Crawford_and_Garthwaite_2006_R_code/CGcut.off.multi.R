@@ -1,6 +1,6 @@
 CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs = NULL, p.crit=0.05, upper=FALSE){
   
-  # ver 0.2, 21/08/2020
+  # ver 0.3, 15/11/2021
   
   # MULTIVARIATE VERSION OF CG CUT-OFF
   
@@ -29,6 +29,11 @@ CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs 
     stop("the length of predictor values should be the same of the number of columns of controls_data")
   }
   
+  
+  if(any(is.na(controls_data))){
+    controls_data=na.omit(controls_data)
+    warning("The dataset included some NA. na.omit() has been applied to the data.", call.=F)
+  }
   
   
   sigma = summary(model)$sigma 
