@@ -1,6 +1,6 @@
 CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs = NULL, p.crit=0.05, upper=FALSE){
   
-  # ver 0.3, 15/11/2021
+  # ver 0.4, 04/05/2022
   
   # MULTIVARIATE VERSION OF CG CUT-OFF
   
@@ -33,6 +33,24 @@ CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs 
   if(any(is.na(controls_data))){
     controls_data=na.omit(controls_data)
     warning("The dataset included some NA. na.omit() has been applied to the data.", call.=F)
+  }
+  
+  # align data names and model names
+  model_names = names(coef(model))[-1] # -1 is to remove the intercept
+  
+  # stop if there is no correspondence  
+  if( length(setdiff(model_names, names(controls_data)))>1 ) {
+   stop("The names in model does not correspond to data") 
+  } else {
+  controls_data = controls_data[, model_names]
+  }
+  
+  # align data names with preds names
+
+  if( length(setdiff(model_names, names(preds)))>1 ) {
+    stop("The names in model does not correspond to data") 
+  } else {
+    preds = preds[model_names]
   }
   
   
