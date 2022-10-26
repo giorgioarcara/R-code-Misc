@@ -18,6 +18,10 @@ zcrit_high = qnorm(alpha/2, lower.tail = F)
 zobs < zcrit_low
 zobs > zcrit_high
 
+# trovare p-value
+# siccome è positivo faccio 1-p
+1-pnorm(zobs)
+
 # intervalli di confidenza.
 m -1.96*(1/sqrt(n))
 m + 1.96*(1/sqrt(n))
@@ -56,7 +60,7 @@ qt(0.01, df = n-1, lower.tail=T)  # trovo il t-critico associato a p = 0.01 (uni
 
 
 
-### ESERCIZIO 6
+### ESERCIZIO 6 p.112
 n=10
 m  = 13
 s = 4
@@ -64,7 +68,7 @@ mu0 = 15
 
 
 tobs = (m-mu0)/(s/sqrt(n)) # calcolo t osservato
-pt(tobs, df = n - 1, lower.tail = F) # trovo il p-value associato al mio t
+pt(tobs, df = n - 1, lower.tail = T) # trovo il p-value associato al mio t
 qt(0.05, df = n-1, lower.tail=T) # trovo il t-critico associato a p = 0.05
 
 
