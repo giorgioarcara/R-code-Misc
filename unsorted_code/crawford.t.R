@@ -1,7 +1,5 @@
 ## example 
 
-
-
 crawford.t <- function(pat.score, control.scores, tails=c("lower", "upper", "two")){
   n = length(control.scores)
   craw.t = (pat.score - mean(control.scores))/( sd(control.scores)*sqrt((n+1)/n))

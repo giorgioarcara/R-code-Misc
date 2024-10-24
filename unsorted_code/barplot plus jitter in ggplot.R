@@ -20,7 +20,7 @@ my_theme = theme(panel.grid.major = element_blank(),
                  panel.background = element_blank(),  # remove backround
                  axis.title.x=element_blank(),  # get rid of of x axis title
                  axis.title.y=element_blank(), # get rid of y axis title
-                 axis.text.x = element_text(colour="black", size=12, vjust=14), # x labels ticks text
+                 axis.text.x = element_text(colour="black", size=12, vjust=0), # x labels ticks text
                  axis.text.y = element_text(colour="black", size=12), # set y labels ticks text
                  axis.line.x = element_line(color="black", size = 0.5), # set x axis line
                  axis.line.y = element_line(color="black", size = 0.5), # set y asxis line
@@ -71,6 +71,21 @@ my_bar_plot_t
 ggplot(iris, aes(x = Species, y = Sepal.Length)) + 
   stat_summary()
   stat_summary(fun.data = mean_se, geom = "errorbar", position=position_dodge(width=10)) 
+  
+  
+### LINE PLOT
+my_line_plot = myplot +
+    stat_summary(aes(group = 1), fun.data = mean_se, geom = "line", size = 1, col = "black") +
+    stat_summary(fun = mean, geom = "point", color = "black", size = 2) +
+    stat_summary(fun.data = mean_se, geom = "errorbar", color = "black", width = 0.2, size = 0.5)
+  
+  
+  my_line_plot_t = my_line_plot + my_theme
+  
+  my_line_plot_t
+  
+  
+  
   
 
 ggsave("My_plot.png",  scale = 1, width=20, height=15, units="cm")

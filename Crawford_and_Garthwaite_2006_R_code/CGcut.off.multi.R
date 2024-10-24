@@ -47,11 +47,12 @@ CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs 
   
   # align data names with preds names
 
-  if( length(setdiff(model_names, names(preds)))>1 ) {
-    stop("The names in model does not correspond to data") 
-  } else {
-    preds = preds[model_names]
-  }
+  # NOTE GA (24/10/2024). This check appears to be incorrect. temporarily commented
+# if( length(setdiff(model_names, names(preds)))>1 ) {
+#  stop("The names in model does not correspond to data") 
+#  } else {
+#    preds = preds[model_names]
+#  }
   
   
   sigma = summary(model)$sigma 
