@@ -1,6 +1,6 @@
 CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs = NULL, p.crit=0.05, upper=FALSE){
   
-  # ver 0.4, 04/05/2022
+  # ver 0.5, 27/02/2025
   
   # MULTIVARIATE VERSION OF CG CUT-OFF
   
@@ -9,6 +9,8 @@ CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs 
   # - preds = a vector with a value for each variable in the model
   # - Yobs = OPTIONAL, the observed y. If not specified the function return the critical t and Y associated with the p.crit
   # - p.crit = the critical p.values. It is used only if Yobs is not specified.
+  
+  # IMPORTANT this version modifies slightly the calculation of zio x zio
   
   #######################
   # PERFORM SOME CHECKS #
@@ -47,9 +49,8 @@ CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs 
   
   # align data names with preds names
 
-  # NOTE GA (24/10/2024). This check appears to be incorrect. temporarily commented
-# if( length(setdiff(model_names, names(preds)))>1 ) {
-#  stop("The names in model does not correspond to data") 
+#  if( length(setdiff(model_names, names(preds)))>1 ) {
+#    stop("The names in model does not correspond to data") 
 #  } else {
 #    preds = preds[model_names]
 #  }
@@ -68,6 +69,11 @@ CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs 
   
   rmat=cor(controls_data) # correlation matrix
   rinv=solve(rmat) # l'inverted correlation matrix (needed for the la formula)
+  
+  # potential fix in case of issues with 
+  #epsilon = 1e-5
+  #rinv = solve(rmat + diag(epsilon, nvar))
+  
   rinv.diag=diag(rinv) # elementi nella diagonale.
   rinv.offdiag=rinv[upper.tri(rinv)]
   
@@ -89,12 +95,12 @@ CGcut.off.multi<-function(controls_data=NULL, model = NULL, preds = NULL,  Yobs 
   # to obtain B, first I creat a mtrix with all possible multiplication between z
   # to to dhat I use the cross-product function %o%
   
-  zio_2_multi=zio_2%o%zio_2
+  zio_multi=zio%o%zio
   
   # isolate off.diag elements
-  zio_2_multi.offdiag=zio_2_multi[upper.tri(zio_2_multi)]
+  zio_multi.offdiag=zio_multi[upper.tri(zio_multi)]
   
-  B=rinv.offdiag%*%zio_2_multi.offdiag
+  B=rinv.offdiag%*%zio_multi.offdiag
   
   Sn_1=sigma*(sqrt( 1 + ( 1/n ) + ( 1/(n-1) ) * A + ( 2/(n-1) ) * B ))
   
